@@ -3,24 +3,35 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Registar = () => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
- 
-  const {signUp} = useContext(AuthContext)
+  const { register, handleSubmit,reset, formState: { errors } } = useForm();
+  const {signUp, updateProfilePicture} = useContext(AuthContext)
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
 
   const onSubmit = data => {
     signUp(data.email,data.password)
     .then(result=>{
       const loggedUser = result.user;
       console.log(loggedUser)
+      updateProfilePicture(data.name,data.photo)
+      .then(()=>{
+        console.log('Update profile success')
+        reset()
+      })
+      .catch(error=>console.log(error))
       Swal.fire({
-        title: 'Success!',
-        text: 'Do you want to continue',
+        title: 'SignUp Success',
         icon: 'success',
         confirmButtonText: 'Success'
       })
+      navigate(from, { replace: true });
     })
   };
 
@@ -89,7 +100,7 @@ const Registar = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">Sign Up</button>
         </div>
       </form>
     </div>

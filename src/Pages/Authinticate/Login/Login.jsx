@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha }
  from 'react-simple-captcha';
 import { AuthContext } from '../../../Provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const captcheRef = useRef(null)
+  // const captcheRef = useRef(null)
   const [disabled,setDisabled] = useState(true)
-
   const {signIn} = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(()=>{
     loadCaptchaEnginge(6); 
@@ -25,7 +27,14 @@ const Login = () => {
         .then(result=>{
           const user = result.user;
           console.log(user)
+          Swal.fire({
+            title: 'Success',
+            text: 'Login seccess',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+          })
         })
+        navigate(from, { replace: true });
     }
 
     const handleCaptcha = e =>{
@@ -64,7 +73,6 @@ const Login = () => {
                 </label>
                 <input type="text" onBlur={handleCaptcha} name='captcha' placeholder="type the captcha above" className="input input-bordered" required
                 />
-                <button  className="btn btn-outline btn-xs mt-2">Validate</button>
               </div>
               <div className="form-control mt-6">
                 <button disabled={disabled} className="btn bg-orange-400">Login</button>
