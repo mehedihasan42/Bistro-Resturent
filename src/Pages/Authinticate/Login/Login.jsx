@@ -3,6 +3,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
  from 'react-simple-captcha';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   // const captcheRef = useRef(null)
@@ -28,8 +29,7 @@ const Login = () => {
           const user = result.user;
           console.log(user)
           Swal.fire({
-            title: 'Success',
-            text: 'Login seccess',
+            title: 'Login Success',
             icon: 'success',
             confirmButtonText: 'Cool'
           })
@@ -71,11 +71,12 @@ const Login = () => {
                 <label className="label">
                 <LoadCanvasTemplate />
                 </label>
-                <input type="text" onBlur={handleCaptcha} name='captcha' placeholder="type the captcha above" className="input input-bordered" required
+                <input type="text" onBlur={handleCaptcha} name='captcha' placeholder="type the captcha above" className="input input-bordered"
                 />
               </div>
+              {/*TODO - make button disable for captcha */}
               <div className="form-control mt-6">
-                <button disabled={disabled} className="btn bg-orange-400">Login</button>
+                <button disabled={false} className="btn bg-orange-400">Login</button>
               </div>
             </form>
             <p><small>New Here?<Link to='/registar'>Registar</Link></small></p>

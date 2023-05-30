@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 
+//TODO- implement pagination here
 const OrderTab = ({ items }) => {
     const pagination = {
         clickable: true,
@@ -15,13 +16,14 @@ const OrderTab = ({ items }) => {
         },
     };
     return (
-        <div className='grid grid-cols-3 gap-10'>
+        <div>
             <Swiper
                 pagination={pagination}
                 modules={[Pagination]}
                 className="mySwiper"
             >
-                <SwiperSlide>
+              
+              <SwiperSlide>
                     {
                         items.map(item => <FoodCart
                             key={item._id}
@@ -29,6 +31,7 @@ const OrderTab = ({ items }) => {
                         ></FoodCart>)
                     }
                 </SwiperSlide>
+          
             </Swiper>
         </div>
 

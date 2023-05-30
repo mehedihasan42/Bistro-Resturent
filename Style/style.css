@@ -1,0 +1,11 @@
+a.active {
+    background-color: rgb(51 65 85);
+  }
+
+.drawer-side a.active {
+    background-color: rgb(51 65 85);
+  }
+
+.drawer-side a {
+    color: #fff;
+  }

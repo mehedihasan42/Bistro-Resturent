@@ -26,7 +26,7 @@ const Order = () => {
       
           <div>
             <Covoer img={orderCovoerPage} title='Order Now'></Covoer>
-            <Tabs className='w-full mx-auto' selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+            <Tabs className='w-full' selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
       <TabList className="image my-8">
         <Tab className="tab tab-bordered">SALAD</Tab>
         <Tab className="tab tab-bordered">PIZZA</Tab>
@@ -35,7 +35,8 @@ const Order = () => {
         <Tab className="tab tab-bordered">DRINKS</Tab>
       </TabList>
   
-    <TabPanel>
+   <div className='grid lg:grid-cols-3 gap-10'>
+   <TabPanel>
          <OrderTab items={desserts}></OrderTab>
       </TabPanel>
     <TabPanel>
@@ -50,6 +51,7 @@ const Order = () => {
     <TabPanel>
          <OrderTab items={offered}></OrderTab>
       </TabPanel>
+   </div>
    
     </Tabs>
         </div>
