@@ -27,7 +27,7 @@ const FoodCart = ({ item }) => {
           if (data.insertedId) {
             refetch();
             Swal.fire({
-              position: 'top-end',
+              position: 'center',
               icon: 'success',
               title: 'Add to cart successfully',
               showConfirmButton: false,

@@ -31,7 +31,7 @@ const Login = () => {
           Swal.fire({
             title: 'Login Success',
             icon: 'success',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Done'
           })
         })
         navigate(from, { replace: true });
