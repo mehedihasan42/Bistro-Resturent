@@ -8,7 +8,7 @@ import css from '../../../../Style/style.css'
 const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext)
-    const [cart] = useCart()
+    const {cart} = useCart()
 
     const handleLogOut = () => {
         logOut()

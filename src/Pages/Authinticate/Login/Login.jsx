@@ -79,7 +79,8 @@ const Login = () => {
                 <button disabled={false} className="btn bg-orange-400">Login</button>
               </div>
             </form>
-            <p><small>New Here?<Link to='/registar'>Registar</Link></small></p>
+            <p className='text-center'><small>New Here?<Link 
+            className='text-orange-500 font-bold' to='/registar'>Registar</Link></small></p>
           </div>
         </div>
       </div>
