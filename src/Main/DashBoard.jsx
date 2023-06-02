@@ -7,6 +7,8 @@ import useCart from '../hooks/useCart';
 
 const DashBoard = () => {
   const {cart} = useCart()
+  //TODO:make a admin ia daynamic
+  const isAdmin = true;
     return (
         <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -17,7 +19,17 @@ const DashBoard = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
           <ul className="menu p-4 w-80 bg-[#D1A054] text-base-content">
-            <li><NavLink to='/'><FaHome/>User Home</NavLink></li>
+           {
+            isAdmin?
+            <>
+             <li><NavLink to='/'><FaHome/>Admin Home</NavLink></li>
+             <li><NavLink to='/'><FaHome/>Add Items</NavLink></li>
+            <li><NavLink to='/'><FaWallet/>Manage Items</NavLink></li>
+            <li><NavLink to='/'><FaWallet/>Manage Bookings</NavLink></li>
+            <li><NavLink to='/deshboard/allusers'><FaCalendarAlt/>All Users</NavLink></li>
+            </>:
+            <>
+             <li><NavLink to='/'><FaHome/>User Home</NavLink></li>
             <li><NavLink to='/deshboard/mycart'><FaShoppingCart/>
             My Cart
             <div className="badge badge-secondary">+{cart?.length || 0}</div>
@@ -25,6 +37,8 @@ const DashBoard = () => {
             </li>
             <li><NavLink to='/'><FaWallet/>Payment History</NavLink></li>
             <li><NavLink to='/'><FaCalendarAlt/>Reservation</NavLink></li>
+            </>
+           }
             <div className="divider"></div>
             <li><NavLink to='/'><FaHome/>Home</NavLink></li>
             <li><NavLink to='/menu'>Our Menu</NavLink></li>

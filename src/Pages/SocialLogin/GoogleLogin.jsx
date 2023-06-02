@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const GoogleLogin = () => {
     const {googleAuthProvider} = useContext(AuthContext)
@@ -13,7 +14,19 @@ const GoogleLogin = () => {
         .then(result=>{
             const loggedUser = result.user;
             console.log(loggedUser)
-            navigate('/')
+
+            const saveCart = {name:loggedUser.displayName,email:loggedUser.email}
+            fetch('http://localhost:5000/users',{
+              method:'POST',
+              headers:{
+                'content-type':'application/json'
+              },
+              body:JSON.stringify(saveCart)
+            })
+            .then(res=>res.json())
+            .then(()=>{
+              navigate('/');
+            })
         })
 
     }
