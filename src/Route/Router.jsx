@@ -12,6 +12,7 @@ import MyCart from "../Pages/DeshBoard/MyCart/MyCart";
 import AllUsers from "../Pages/DeshBoard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddItem from "../Pages/DeshBoard/AddItem/AddItem";
+import ManageItems from "../Pages/DeshBoard/ManageItems/ManageItems";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         {
           path:'addItem',
           element:<AdminRoute><AddItem></AddItem></AdminRoute>
+        },
+        {
+          path:'manageitems',
+          element:<AdminRoute><ManageItems></ManageItems></AdminRoute>
         }
       ]
     }

@@ -1,25 +1,60 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
-const image_hosting_token=import.meta.env.VITE_Image_Upload_token
+import Swal from 'sweetalert2';
 
 const AddItem = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const image_hosting_url=`https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_token}`
-  const onSubmit = data => {
-    const formData = new formData();
-    formData.append('image',data.image[0])
-    fetch(image_hosting_url,{
-       method:'POST',
-       body:formData
-    })
-    .then(res=>res.json())
-    .then(imgResponse=>{
-      console.log(imgResponse)
-    })
+  const { register, handleSubmit, reset } = useForm();
+  // const image_hosting_url=`https://api.imgbb.com/1/upload?expiration=600&key=${image_hosting_token}`
+
+  const onSubmit = async (data) => {
+    const apiKey = import.meta.env.VITE_Image_Upload_token; 
+    const imageFile = data.image[0];
+
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+      const imageUrl = result.data.url;
+      const {name,category,price,details} = data;
+      const newData = {name,category,price:parseFloat(price),details,image:imageUrl}
+      console.log(newData)
+      const addNewItem = {newData}
+      fetch('http://localhost:5000/menu',{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify({addNewItem})
+      })
+      .then(res=>res.json())
+      .then((data)=>{
+        if(data.insertedId){
+            reset()
+            Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: 'Item added successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+        }
+      })
+     
+      
+
+      // console.log(data)
+    } catch (error) {
+      // console.error('Error uploading image:', error);
+    }
   };
-  console.log(errors);
-  console.log(image_hosting_token)
+  // console.log(errors);
+ 
   return (
     <div className="hero w-full bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -40,7 +75,7 @@ const AddItem = () => {
                 <span className="label-text">Category*</span>
               </label>
                 <select defaultValue="Category"
-                {...register("Category", { required: true})}
+                {...register("category", { required: true})}
                  className="select select-bordered w-full max-w-xs">
                   <option disabled selected>Category</option>
                   <option>Pizza</option>
@@ -65,14 +100,17 @@ const AddItem = () => {
                {...register("details", {required: true, maxLength: 120})}
                type="text" placeholder="Recipe Details" className="input input-bordered h-36" />
             </div>
+
             <div>
             <input
-             {...register("image", {required: true, maxLength: 120})}
+            {...register('image')} 
              type="file" className="file-input file-input-bordered file-input-xs w-full max-w-xs" />
             </div>
+
             <div className="form-control mt-6">
             <input className="btn btn-sm mt-4" type="submit" value="Add Item" />
             </div>
+
           </div>
         </form>
       </div>

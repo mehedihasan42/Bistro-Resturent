@@ -26,7 +26,7 @@ const DashBoard = () => {
             <>
              <li><NavLink to='/'><FaHome/>Admin Home</NavLink></li>
              <li><NavLink to='addItem'><FaHome/>Add Item</NavLink></li>
-            <li><NavLink to='/'><FaWallet/>Manage Items</NavLink></li>
+            <li><NavLink to='/deshboard/manageitems'><FaWallet/>Manage Items</NavLink></li>
             <li><NavLink to='/'><FaWallet/>Manage Bookings</NavLink></li>
             <li><NavLink to='/deshboard/allusers'><FaCalendarAlt/>All Users</NavLink></li>
             </>:
