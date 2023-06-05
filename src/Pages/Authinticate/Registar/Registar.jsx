@@ -5,12 +5,12 @@ import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../../SocialLogin/GoogleLogin';
-import Login from '../Login/Login';
+import useAuth from '../../../hooks/useAuth';
 
 const Registar = () => {
 
   const { register, handleSubmit,reset, formState: { errors } } = useForm();
-  const {signUp,updateProfilePicture} = useContext(AuthContext)
+  const {signUp,updateProfilePicture} = useAuth()
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,7 +24,7 @@ const Registar = () => {
       const loggedUser = result.user;
       console.log(loggedUser)
 
-      updateProfilePicture(data.name)
+      updateProfilePicture(data.name,data.photo)
       .then(()=>{
 
         const saveCart = {name:data.name,email:data.email}
@@ -36,8 +36,8 @@ const Registar = () => {
           body:JSON.stringify(saveCart)
         })
         .then(res=>res.json())
-        .then(data=>{
-         if(data.insertedId){
+        .then(()=>{
+        //  if(data.insertedId){
           reset()
           Swal.fire({
             title: 'SignUp Success',
@@ -45,7 +45,7 @@ const Registar = () => {
             confirmButtonText: 'Success'
           })
           navigate('/');
-         }
+        //  }
         })
       })
       .catch(error=>console.log(error))
@@ -131,3 +131,5 @@ const Registar = () => {
 };
 
 export default Registar;
+
+//78-6=8

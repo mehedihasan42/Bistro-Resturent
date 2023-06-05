@@ -4,11 +4,12 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from '../../../hooks/useCart';
 import css from '../../../../Style/style.css'
+import useAuth from '../../../hooks/useAuth';
 
 const NavBar = () => {
 
-    const { user, logOut } = useContext(AuthContext)
-    const {cart} = useCart()
+    const { user, logOut } = useAuth()
+    const [cart] = useCart()
 
     const handleLogOut = () => {
         logOut()

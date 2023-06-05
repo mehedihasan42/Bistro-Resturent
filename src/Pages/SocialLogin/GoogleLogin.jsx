@@ -4,9 +4,10 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAuth from '../../hooks/useAuth';
 
 const GoogleLogin = () => {
-    const {googleAuthProvider} = useContext(AuthContext)
+    const {googleAuthProvider} = useAuth()
     const navigate = useNavigate();
 
     const handleGoogleSignIn = () =>{

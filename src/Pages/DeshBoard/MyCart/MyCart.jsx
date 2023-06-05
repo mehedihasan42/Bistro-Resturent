@@ -5,8 +5,9 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
 
 const MyCart = () => {
-    const { cart,refetch } = useCart()
-    const total = cart.reduce((sum, item) => item.price + sum, 0)
+    const [cart,refetch ] = useCart()
+    // console.log(cart)
+    const total = cart?.reduce((sum, item) => item.price + sum, 0)
 
     const handleDelete = item =>{
         Swal.fire({
@@ -80,9 +81,10 @@ const MyCart = () => {
                                     ${item.price}
                                 </td>
                                 <th>
-                                    <button
+                                 <button
                                  onClick={()=>handleDelete(item)}
-                                 className="btn bg-red-500 text-white p-6 btn-xs"><FaTrashAlt className='' /></button>
+                                 className="btn bg-red-500 text-white p-6 btn-xs"><FaTrashAlt className='' />
+                                 </button>
                                 </th>
                             </tr>
                             </tbody>
