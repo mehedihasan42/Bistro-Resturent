@@ -13,6 +13,7 @@ import AllUsers from "../Pages/DeshBoard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddItem from "../Pages/DeshBoard/AddItem/AddItem";
 import ManageItems from "../Pages/DeshBoard/ManageItems/ManageItems";
+import Payment from "../Pages/DeshBoard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
         {
           path:'manageitems',
           element:<AdminRoute><ManageItems></ManageItems></AdminRoute>
+        },
+        {
+          path:'payment',
+          element:<Payment></Payment>
         }
       ]
     }
